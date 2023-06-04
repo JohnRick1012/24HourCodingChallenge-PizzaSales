@@ -14,7 +14,7 @@ public class Pizzas {
     private Long pizzaId;
 
     @Column(name = "size", nullable = false)
-    private char size;
+    private String size;
 
     @Column(name = "price", nullable = false)
     private double price;
@@ -23,14 +23,14 @@ public class Pizzas {
     @JoinColumn(name = "pizza_type_id")
     private List<PizzaTypes> pizzaTypes;
 
-    public Pizzas() {
 
-    }
-
-    public Pizzas(char size, double price, List<PizzaTypes> pizzaTypes) {
+    public Pizzas(String size, double price, List<PizzaTypes> pizzaTypes) {
         this.size = size;
         this.price = price;
         this.pizzaTypes = pizzaTypes;
+    }
+
+    public Pizzas(Long pizzaId, String size, double price, List<PizzaTypes> pizzaTypes) {
     }
 
     public Long getPizzaId() {
@@ -41,11 +41,11 @@ public class Pizzas {
         this.pizzaId = pizzaId;
     }
 
-    public char getSize() {
+    public String getSize() {
         return size;
     }
 
-    public void setSize(char size) {
+    public void setSize(String size) {
         this.size = size;
     }
 

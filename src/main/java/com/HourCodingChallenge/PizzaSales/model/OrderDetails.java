@@ -2,6 +2,7 @@ package com.HourCodingChallenge.PizzaSales.model;
 
 import jakarta.persistence.*;
 
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -31,6 +32,9 @@ public class OrderDetails {
         this.quantity = quantity;
         this.pizzas = pizzas;
         this.orders = orders;
+    }
+
+    public OrderDetails(Long orderDetailsId, int quantity, List<Orders> ordersList, List<Pizzas> pizzasList) {
     }
 
     public Long getOrderDetailsId() {
