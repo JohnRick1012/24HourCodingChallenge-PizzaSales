@@ -2,8 +2,9 @@ package com.HourCodingChallenge.PizzaSales;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 
-@SpringBootApplication
+@SpringBootApplication(exclude = { SecurityAutoConfiguration.class })
 public class PizzaSalesApplication {
 
 	public static void main(String[] args) {
