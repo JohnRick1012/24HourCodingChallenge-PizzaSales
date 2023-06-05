@@ -23,11 +23,15 @@ public class Pizzas {
     @JoinColumn(name = "pizza_type_id")
     private List<PizzaTypes> pizzaTypes;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    private OrderDetails orderDetails;
 
-    public Pizzas(String size, double price, List<PizzaTypes> pizzaTypes) {
+
+    public Pizzas(String size, double price, List<PizzaTypes> pizzaTypes, OrderDetails orderDetails) {
         this.size = size;
         this.price = price;
         this.pizzaTypes = pizzaTypes;
+        this.orderDetails = orderDetails;
     }
 
     public Pizzas(Long pizzaId, String size, double price, List<PizzaTypes> pizzaTypes) {
@@ -65,26 +69,35 @@ public class Pizzas {
         this.pizzaTypes = pizzaTypes;
     }
 
+    public OrderDetails getOrderDetails() {
+        return orderDetails;
+    }
+
+    public void setOrderDetails(OrderDetails orderDetails) {
+        this.orderDetails = orderDetails;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Pizzas pizzas = (Pizzas) o;
-        return size == pizzas.size && Double.compare(pizzas.price, price) == 0 && Objects.equals(pizzaId, pizzas.pizzaId) && Objects.equals(pizzaTypes, pizzas.pizzaTypes);
+        return Double.compare(pizzas.price, price) == 0 && Objects.equals(pizzaId, pizzas.pizzaId) && Objects.equals(size, pizzas.size) && Objects.equals(pizzaTypes, pizzas.pizzaTypes) && Objects.equals(orderDetails, pizzas.orderDetails);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(pizzaId, size, price, pizzaTypes);
+        return Objects.hash(pizzaId, size, price, pizzaTypes, orderDetails);
     }
 
     @Override
     public String toString() {
         return "Pizzas{" +
                 "pizzaId=" + pizzaId +
-                ", size=" + size +
+                ", size='" + size + '\'' +
                 ", price=" + price +
                 ", pizzaTypes=" + pizzaTypes +
+                ", orderDetails=" + orderDetails +
                 '}';
     }
 }

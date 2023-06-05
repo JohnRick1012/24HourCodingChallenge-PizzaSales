@@ -1,9 +1,6 @@
 package com.HourCodingChallenge.PizzaSales.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.util.Objects;
 
@@ -24,14 +21,18 @@ public class PizzaTypes {
     @Column(name = "ingredients", length = 1000, nullable = false)
     private String ingredients;
 
+    @ManyToOne(cascade =  CascadeType.ALL)
+    private Pizzas pizzas;
+
     public PizzaTypes() {
 
     }
 
-    public PizzaTypes(String name, String category, String ingredients) {
+    public PizzaTypes(String name, String category, String ingredients, Pizzas pizzas) {
         this.name = name;
         this.category = category;
         this.ingredients = ingredients;
+        this.pizzas = pizzas;
     }
 
     public Long getPizzaTypeId() {
@@ -66,17 +67,25 @@ public class PizzaTypes {
         this.ingredients = ingredients;
     }
 
+    public Pizzas getPizzas() {
+        return pizzas;
+    }
+
+    public void setPizzas(Pizzas pizzas) {
+        this.pizzas = pizzas;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         PizzaTypes that = (PizzaTypes) o;
-        return Objects.equals(pizzaTypeId, that.pizzaTypeId) && Objects.equals(name, that.name) && Objects.equals(category, that.category) && Objects.equals(ingredients, that.ingredients);
+        return Objects.equals(pizzaTypeId, that.pizzaTypeId) && Objects.equals(name, that.name) && Objects.equals(category, that.category) && Objects.equals(ingredients, that.ingredients) && Objects.equals(pizzas, that.pizzas);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(pizzaTypeId, name, category, ingredients);
+        return Objects.hash(pizzaTypeId, name, category, ingredients, pizzas);
     }
 
     @Override
@@ -86,6 +95,7 @@ public class PizzaTypes {
                 ", name='" + name + '\'' +
                 ", category='" + category + '\'' +
                 ", ingredients='" + ingredients + '\'' +
+                ", pizzas=" + pizzas +
                 '}';
     }
 }
